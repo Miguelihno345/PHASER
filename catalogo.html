@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PHASER — tienda de guitarras eléctricas. Explora guitarras de las mejores marcas.">
+  <title>PHASER — Electric Guitar Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { phaser: { ink:'#080808', panel:'#111111', line:'#292929', cream:'#e9e3d9', gold:'#d8a65d' } }, fontFamily: { display:['Space Grotesk','sans-serif'], sans:['DM Sans','sans-serif'] } } } }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="catalog">
+  <div class="announcement-bar">BUILT FOR THE SOUND YOU LOVE <span>✦</span> ENVÍOS Y CONSULTAS — CONTACTANOS</div>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg navbar-dark container-fluid px-3 px-lg-5 py-3">
+      <a class="navbar-brand brand-mark" href="index.html" id="brandHome" aria-label="PHASER - Ir a la página principal">PHASER<span>®</span><small>GUITAR STORE</small></a>
+      <div class="mobile-header-actions"><button class="navbar-toggler phaser-menu-toggle" type="button" id="phaserMenuToggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú de navegación" title="Abrir menú"><span></span><span></span><span></span></button></div>
+      <div class="phaser-nav-panel" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-lg-4">
+          <li class="nav-item"><a class="nav-link" href="index.html">INICIO</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalogo.html#catalogo">CATÁLOGO</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#marcas">MARCAS</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contacto">CONTACTO</a></li>
+                  <li class="nav-item nav-admin-item"><button class="nav-link nav-admin-link" type="button" id="adminMenuOpen"><i class="bi bi-shield-lock"></i> PANEL ADMINISTRATIVO</button></li>
+        </ul>
+        <div class="header-actions">
+          <button class="icon-button" id="searchFocus" aria-label="Buscar"><i class="bi bi-search"></i><span>BUSCAR</span></button>
+          <button class="icon-button cart-trigger" id="cartOpen" aria-label="Abrir carrito"><i class="bi bi-bag"></i><span>CARRITO</span><b id="cartCount">0</b></button>
+          <button class="admin-entry" id="adminOpen">PANEL ADMIN <i class="bi bi-arrow-up-right"></i></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="catalog-page-hero container-fluid px-3 px-lg-5">
+      <p class="eyebrow"><span class="eyebrow-line"></span> PHASER COLLECTION / ALL MODELS</p>
+      <h1>El catálogo<br><em>completo.</em></h1>
+      <p>Explorá todas las guitarras disponibles, compará marcas y encontrá el instrumento que define tu sonido.</p>
+    </section>
+    <section class="section-block container-fluid px-3 px-lg-5 catalog-full-section" id="catalogo">
+      <div class="section-heading">
+        <div><p class="eyebrow">ALL GUITARS / ALL STYLES</p><h2>Encontrá la tuya<span class="heading-dot">.</span></h2></div>
+        <p class="section-intro">Filtrá por marca, categoría o buscá directamente el modelo que tenés en mente.</p>
+      </div>
+      <div class="catalog-toolbar">
+        <div class="catalog-count"><strong id="resultCount">CARGANDO</strong><span> INSTRUMENTOS</span></div>
+        <div class="filter-controls">
+          <div class="search-wrap"><i class="bi bi-search"></i><input id="searchInput" type="search" placeholder="Buscar guitarra, marca..." aria-label="Buscar productos"></div>
+          <select id="brandFilter" class="form-select" aria-label="Filtrar por marca"><option value="">Todas las marcas</option></select>
+          <select id="categoryFilter" class="form-select" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option></select>
+          <select id="sortFilter" class="form-select" aria-label="Ordenar productos"><option value="featured">Destacados</option><option value="price-asc">Precio: menor a mayor</option><option value="price-desc">Precio: mayor a menor</option><option value="name">Nombre A-Z</option></select>
+        </div>
+      </div>
+      <div id="loadingState" class="state-message"><div class="loader"></div><span>Conectando con el catálogo PHASER...</span></div>
+      <div id="errorState" class="state-message d-none"><i class="bi bi-wifi-off"></i><strong>No pudimos cargar el catálogo.</strong><span>Revisá tu conexión e intentá nuevamente.</span><button class="btn-outline-phaser" id="retryLoad">REINTENTAR</button></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div id="emptyState" class="state-message d-none"><i class="bi bi-search"></i><strong>No encontramos guitarras.</strong><span>Probá cambiar los filtros de búsqueda.</span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="container-fluid px-3 px-lg-5">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand-mark" href="index.html">PHASER<span>®</span><small>GUITAR STORE</small></a>
+          <p>Find your sound. Make it yours.</p>
+        </div>
+        <div class="footer-column">
+          <span class="footer-label">EXPLORAR</span>
+          <a href="index.html">Inicio</a>
+          <a href="catalogo.html">Catálogo completo</a>
+          <a href="index.html#marcas">Marcas</a>
+        </div>
+        <div class="footer-column">
+          <span class="footer-label">CONTACTO & REDES</span>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Contacto por Instagram ↗</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 PHASER GUITAR STORE</span><span>MADE FOR MUSIC LOVERS</span><span>CATÁLOGO DINÁMICO · MOCKAPI</span></div>
+    </div>
+  </footer>
+
+  <!-- Product detail modal -->
+  <div class="modal fade phaser-modal" id="productModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><button class="modal-close" data-bs-dismiss="modal" aria-label="Cerrar">×</button><div class="modal-body" id="productModalBody"></div></div></div></div>
+
+  <!-- Cart offcanvas -->
+  <div class="offcanvas offcanvas-end cart-panel" tabindex="-1" id="cartPanel" aria-labelledby="cartTitle"><div class="offcanvas-header"><div><p class="eyebrow">YOUR SELECTION</p><h5 id="cartTitle">Tu carrito <span id="cartPanelCount">(0)</span></h5></div><button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button></div><div class="offcanvas-body"><div id="cartItems"></div><div class="cart-summary"><div><span>Subtotal</span><strong id="cartSubtotal">Bs 0</strong></div><p>La compra es una simulación académica. El stock se actualizará en MockAPI al confirmar.</p><button class="btn-phaser w-100" id="checkoutButton">CONFIRMAR COMPRA <i class="bi bi-arrow-right"></i></button><button class="text-link w-100 mt-3" data-bs-dismiss="offcanvas">SEGUIR EXPLORANDO</button></div></div></div>
+
+  <!-- Admin login modal -->
+  <div class="modal fade phaser-modal" id="adminLoginModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content admin-login"><button class="modal-close" data-bs-dismiss="modal" aria-label="Cerrar">×</button><p class="eyebrow">RESTRICTED ACCESS</p><h3>Panel <em>admin.</em></h3><p class="muted">Ingresá tus credenciales para administrar el catálogo.</p><form id="adminLoginForm"><label>USUARIO<input class="form-control" id="adminUser" autocomplete="username" required></label><label>CONTRASEÑA<input class="form-control" id="adminPassword" type="password" autocomplete="current-password" required></label><p class="form-error d-none" id="loginError">Usuario o contraseña incorrectos.</p><button class="btn-phaser w-100" type="submit">INGRESAR <i class="bi bi-arrow-right"></i></button></form></div></div></div>
+
+  <!-- Admin dashboard -->
+  <div class="modal fade phaser-modal admin-dashboard-modal" id="adminModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><div class="admin-head"><div><p class="eyebrow">PHASER CONTROL ROOM</p><h3>Administración<span class="heading-dot">.</span></h3></div><button class="modal-close" data-bs-dismiss="modal" aria-label="Cerrar">×</button></div><div class="modal-body admin-body"><div class="admin-stats"><div><span>PRODUCTOS</span><strong id="adminTotal">0</strong></div><div><span>UNIDADES EN STOCK</span><strong id="adminStock">0</strong></div><div><span>MARCAS</span><strong id="adminBrands">0</strong></div></div><div class="admin-toolbar"><h4>Inventario</h4><div class="d-flex gap-2"><button class="btn-outline-phaser" id="refreshInventoryButton"><i class="bi bi-arrow-clockwise"></i> ACTUALIZAR</button><button class="btn-phaser" id="addProductButton"><i class="bi bi-plus-lg"></i> NUEVA GUITARRA</button></div></div><div class="table-responsive"><table class="table admin-table"><thead><tr><th>PRODUCTO</th><th>MARCA</th><th>CATEGORÍA</th><th>PRECIO (Bs)</th><th>STOCK</th><th>ACCIONES</th></tr></thead><tbody id="adminTableBody"></tbody></table></div><div class="admin-foot"><span id="adminStatus">Cambios sincronizados con MockAPI.</span><button class="text-link" id="adminLogout">CERRAR SESIÓN ↗</button></div></div></div></div></div>
+
+  <!-- Add/edit product modal -->
+  <div class="modal fade phaser-modal" id="productFormModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content admin-login product-form-modal"><button class="modal-close" data-bs-dismiss="modal" aria-label="Cerrar">×</button><p class="eyebrow">INVENTORY MANAGEMENT</p><h3 id="productFormTitle">Nueva <em>guitarra.</em></h3><form id="productForm"><input type="hidden" id="editProductId"><div class="form-grid"><label>NOMBRE<input class="form-control" id="formNombre" required></label><label>MARCA<input class="form-control" id="formMarca" required></label><label>MODELO<input class="form-control" id="formModelo" required></label><label>CATEGORÍA<input class="form-control" id="formCategoria" required></label><label>PRECIO (Bs)<input class="form-control" id="formPrecio" type="number" min="0" step="0.01" required></label><label>STOCK<input class="form-control" id="formStock" type="number" min="0" step="1" required></label><label class="full-field">URL DE IMAGEN<input class="form-control" id="formImagen" type="url" placeholder="https://..."></label><label class="full-field">DESCRIPCIÓN<textarea class="form-control" id="formDescripcion" rows="3" required></textarea></label></div><button class="btn-phaser w-100 mt-3" type="submit" id="saveProductButton">GUARDAR PRODUCTO <i class="bi bi-arrow-right"></i></button></form></div></div></div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="phaserToast" class="toast phaser-toast" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-body"><i class="bi bi-check-circle"></i><span id="toastMessage">Listo.</span><button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button></div></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="js/api.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
